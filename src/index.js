@@ -1,17 +1,29 @@
-let apiKey =
-  "https://api.shecodes.io/weather/v1/current?query=johannesburg&key=0d960fc5373f90965a3a4tb970addoe0";
+let apiKey = "0d960fc5373f90965a3a4tb970addoe0"
+let base_Url = 
+  "https://api.shecodes.io/weather/v1/current";
 
 function showTemp(response) {
-  console.log(response);
+
+  console.log(response.data);
 }
 
-axios.get(apiKey).then(showTemp);
+
+function searchCity(city) {
+  let apiUrl = `${base_Url}?query=${city}&key=${apiKey}`;
+  console.log("Calling API: ", apiUrl)
+
+  axios.get(apiUrl).then(showTemp);
+}
 
 function search(event) {
   event.preventDefault();
+
   let searchInputElement = document.querySelector("#search-input");
-  let cityElement = document.querySelector("#current-city");
-  cityElement.innerHTML = searchInputElement.value;
+  let city = searchInputElement.value;
+
+  document.querySelector("#current-city").innerHTML = city;
+
+  searchCity(city);
 }
 
 function formatDate(date) {
