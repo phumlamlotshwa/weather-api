@@ -6,6 +6,11 @@ function refreshWeather(response){
   let cityElement = document.querySelector("#city"); //selects city
   cityElement.innerHTML = response.data.city; /*changing the html of the city to the value of 
    what the user searches, .value is basically the new city */
+
+  let descriptionElement = document.querySelector("#description")
+  descriptionElement.innerHTML = response.data.condition.description;
+
+   console.log(response.data.condition.description);
 }
 
 
