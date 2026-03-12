@@ -1,24 +1,36 @@
-function displayTemperature(response) {
-  let temperatureElement = document.querySelector("#current-temperature");
-  let temperature = Math.round(response.data.temperature.current);
-  let cityElement = document.querySelector("#current-city");
-  cityElement.innerHTML = response.data.city;
+function refreshWeather(response){
+  let temperatureElement = document.querySelector("#temperature");
+  let temperature = response.data.temperature.current; //changes the hardcoded temperature to the one called by the API
   temperatureElement.innerHTML = Math.round(temperature);
+
+  let cityElement = document.querySelector("#city"); //selects city
+  cityElement.innerHTML = response.data.city; /*changing the html of the city to the value of 
+   what the user searches, .value is basically the new city */
 }
 
-function search(event) {
+
+function searchCity(city){
+  //calls api to update city and show data for the city
+
+    let apiKey = "0d960fc5373f90965a3a4tb970addoe0";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(refreshWeather);
+
+}
+
+
+function handleSearchSubmit(event){
   event.preventDefault();
-  let searchInputElement = document.querySelector("#search-input");
-  let city = searchInputElement.value;
 
-  let apiKey = "0d960fc5373f90965a3a4tb970addoe0";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  let searchInput = document.querySelector("#search-form-input"); //selects place holder
+  
 
-  axios.get(apiUrl).then(displayTemperature);
+   searchCity(searchInput.value); //this makes the value to be sent to the searchcity function so the api can be called
+
+
 }
 
-let searchForm = document.querySelector("#search-form");
-searchForm.addEventListener("submit", search);
+let searchFormElement = document.querySelector("#search-form");
+searchFormElement.addEventListener("submit", handleSearchSubmit);
 
-search("Nelspruit")
-
+searchCity("Johannesburg")
