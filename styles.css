@@ -69,12 +69,12 @@ a{
 
 /* emoji */
 .weather-app-temp-icon{
-  font-size: 40px;
-  margin-top: 20px;
+  width: 88px;
+  height: 88px;
 }
 /* degrees celcius */
 .weather-app-temp-unit{
-  margin-top: 23px;
+  margin-top: 6px;
   font-size: 20px;
   font-weight: bold;
 }

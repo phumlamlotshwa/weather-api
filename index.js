@@ -18,8 +18,13 @@ function refreshWeather(response) {
   windSpeedElement.innerHTML = `${response.data.wind.speed} km/h`;
 
   let timeElement = document.querySelector("#time");
-  let date = new Date(response.data.time * 1000);
+  let date = new Date(response.data.time * 1000); //converting seconds into milliseconds
   timeElement.innerHTML = formatDate(date);
+
+  let iconElement = document.querySelector("#icon")
+   iconElement.innerHTML = `<img src="${response.data.condition.icon_url}"class= weather-app-temp-icon"/>`;
+
+  console.log(response.data);
 }
 
 function formatDate(date) {
